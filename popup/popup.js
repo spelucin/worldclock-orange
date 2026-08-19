@@ -4,7 +4,6 @@ import {
   formatTime,
   getHoursDiffMinutes,
   formatDiff,
-  formatDiffNote,
   isWithinWorkingHours,
   formatDate,
   friendlyCity,
@@ -19,6 +18,7 @@ import {
 } from "../lib/store.js";
 import { MODES } from "../lib/theme.js";
 import { createSearch } from "../lib/search.js";
+import { setLang, locale, applyI18n, t } from "../lib/i18n.js";
 
 const $ = (sel) => document.querySelector(sel);
 
@@ -35,7 +35,9 @@ async function init() {
   ensurePrimary();
   activeId = locations.find((l) => l.isPrimary)?.id || locations[0]?.id || null;
 
+  setLang(settings.lang);
   applyTheme();
+  applyI18n();
 
   const search = createSearch({
     onPick: (item) => addLocation(item),
@@ -85,8 +87,8 @@ function workInfo(timeZone, work) {
   if (!timeZone) return null;
   const ok = isWithinWorkingHours(timeZone, work.workStart, work.workEnd, work.weekdaysOnly);
   return ok
-    ? { cls: "ok", label: "En horario" }
-    : { cls: "bad", label: "Fuera de horario" };
+    ? { cls: "ok", label: t("inHours") }
+    : { cls: "bad", label: t("outHours") };
 }
 
 function setPill(el, info) {
@@ -102,7 +104,7 @@ function render() {
 
   $("#localZone").textContent = friendlyCity(localTz);
   $("#localTime").textContent = formatTime(local.hour, local.minute);
-  $("#localDate").textContent = formatDate(localTz, now);
+  $("#localDate").textContent = formatDate(localTz, now, locale());
   setPill(
     $("#localWork"),
     workInfo(localTz, {
@@ -123,25 +125,26 @@ function render() {
     }
     lastRemoteTime = remoteTime;
 
-    $("#remoteLabel").textContent = active.isPrimary ? "Ubicación principal" : "Ubicación";
+    $("#remoteLabel").textContent = active.isPrimary ? t("primaryLocation") : t("location");
     $("#remoteName").textContent = active.label;
     $("#remoteTime").textContent = remoteTime;
-    $("#remoteDate").textContent = formatDate(active.timezone, now);
+    $("#remoteDate").textContent = formatDate(active.timezone, now, locale());
     const pill = $("#remoteWork");
     pill.hidden = false;
     setPill(pill, workInfo(active.timezone, active));
 
     const diff = getHoursDiffMinutes(localTz, active.timezone, now);
     $("#diff").textContent = formatDiff(diff);
-    $("#diffNote").textContent = formatDiffNote(diff);
+    $("#diffNote").textContent =
+      diff === 0 ? t("sameTime") : diff > 0 ? t("ahead") : t("behind");
   } else {
-    $("#remoteLabel").textContent = "Ubicación";
+    $("#remoteLabel").textContent = t("location");
     $("#remoteName").textContent = "—";
     $("#remoteTime").textContent = "--:--";
     $("#remoteDate").textContent = "";
     $("#remoteWork").hidden = true;
     $("#diff").textContent = "—";
-    $("#diffNote").textContent = "Añade una ubicación";
+    $("#diffNote").textContent = t("addLocation");
   }
 
   renderList(now);
@@ -191,7 +194,7 @@ function renderList(now) {
     const star = document.createElement("button");
     star.type = "button";
     star.className = `loc-action-btn star${loc.isPrimary ? " starred" : ""}`;
-    star.title = loc.isPrimary ? "Ubicación principal" : "Marcar como principal";
+    star.title = loc.isPrimary ? t("primaryLocation") : t("setPrimary");
     star.innerHTML = STAR_ICON;
     star.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -201,7 +204,7 @@ function renderList(now) {
     const remove = document.createElement("button");
     remove.type = "button";
     remove.className = "loc-action-btn danger";
-    remove.title = "Eliminar";
+    remove.title = t("remove");
     remove.innerHTML = TRASH_ICON;
     remove.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -226,7 +229,7 @@ function addLocation(item) {
     id: uid(),
     label: item.city,
     timezone: item.timezone,
-    country: item.country || item.region || "",
+    country: item.country || "",
     isPrimary: first,
     ...DEFAULT_WORK,
   };

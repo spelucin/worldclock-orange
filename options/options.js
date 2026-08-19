@@ -8,11 +8,13 @@ import {
 } from "../lib/store.js";
 import { ACCENTS, ACCENT_NAMES } from "../lib/theme.js";
 import { createSearch } from "../lib/search.js";
+import { setLang, getLang, applyI18n, t } from "../lib/i18n.js";
 
 const $ = (sel) => document.querySelector(sel);
 
 let locations = [];
 let settings = {};
+let searchCtl = null;
 
 init();
 
@@ -21,17 +23,20 @@ async function init() {
   settings = await getSettings();
   ensurePrimary();
 
+  setLang(settings.lang);
   applyTheme();
+  applyI18n();
   renderTheme();
   renderMode();
+  renderLang();
   renderLocalHours();
   renderList();
 
-  const search = createSearch({
+  searchCtl = createSearch({
     onPick: (item) => addLocation(item),
   });
-  search.mount($("#searchWrap"));
-  search.focus();
+  searchCtl.mount($("#searchWrap"));
+  searchCtl.focus();
 
   bind();
 }
@@ -84,8 +89,14 @@ function renderTheme() {
 }
 
 function renderMode() {
-  document.querySelectorAll(".seg-btn").forEach((btn) => {
+  document.querySelectorAll("#modeSegmented .seg-btn").forEach((btn) => {
     btn.classList.toggle("active", btn.dataset.mode === settings.mode);
+  });
+}
+
+function renderLang() {
+  document.querySelectorAll("#langSegmented .seg-btn").forEach((btn) => {
+    btn.classList.toggle("active", btn.dataset.lang === getLang());
   });
 }
 
@@ -104,7 +115,7 @@ function addLocation(item) {
     id: uid(),
     label: item.city,
     timezone: item.timezone,
-    country: item.country || item.region || "",
+    country: item.country || "",
     isPrimary: first,
     ...DEFAULT_WORK,
   });
@@ -141,7 +152,7 @@ function renderList() {
     const star = document.createElement("button");
     star.type = "button";
     star.className = `opt-action${loc.isPrimary ? " starred" : ""}`;
-    star.title = loc.isPrimary ? "Ubicación principal" : "Marcar como principal";
+    star.title = loc.isPrimary ? t("primaryLocation") : t("setPrimary");
     star.innerHTML = STAR_ICON;
     star.addEventListener("click", () => {
       locations.forEach((l) => (l.isPrimary = l.id === loc.id));
@@ -152,7 +163,7 @@ function renderList() {
     const remove = document.createElement("button");
     remove.type = "button";
     remove.className = "opt-action danger";
-    remove.title = "Eliminar";
+    remove.title = t("remove");
     remove.innerHTML = TRASH_ICON;
     remove.addEventListener("click", () => {
       locations = locations.filter((l) => l.id !== loc.id);
@@ -173,7 +184,7 @@ function renderList() {
     start.type = "time";
     start.className = "opt-time";
     start.value = loc.workStart;
-    start.title = "Inicio de horario laboral";
+    start.title = t("start");
     start.addEventListener("change", () => {
       loc.workStart = start.value || "09:00";
       saveLocations(locations);
@@ -185,7 +196,7 @@ function renderList() {
     end.type = "time";
     end.className = "opt-time";
     end.value = loc.workEnd;
-    end.title = "Fin de horario laboral";
+    end.title = t("end");
     end.addEventListener("change", () => {
       loc.workEnd = end.value || "18:00";
       saveLocations(locations);
@@ -201,7 +212,7 @@ function renderList() {
       loc.weekdaysOnly = check.checked;
       saveLocations(locations);
     });
-    label.append(check, document.createTextNode("Solo lunes a viernes"));
+    label.append(check, document.createTextNode(t("weekdaysOnly")));
 
     body.append(workRow, label);
     card.append(head, body);
@@ -212,12 +223,24 @@ function renderList() {
 /* ---------- Bindings ---------- */
 
 function bind() {
-  document.querySelectorAll(".seg-btn").forEach((btn) => {
+  document.querySelectorAll("#modeSegmented .seg-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       settings.mode = btn.dataset.mode;
       saveSettings(settings);
       applyTheme();
       renderMode();
+    });
+  });
+
+  document.querySelectorAll("#langSegmented .seg-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      settings.lang = btn.dataset.lang;
+      saveSettings(settings);
+      setLang(settings.lang);
+      applyI18n();
+      renderLang();
+      renderList();
+      if (searchCtl) searchCtl.focus();
     });
   });
 
