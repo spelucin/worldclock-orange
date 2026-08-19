@@ -42,9 +42,11 @@
         <span class="clock-date" id="localDate"></span>
       </div>
 
-      <div class="diff" id="diffWrap">
-        <span class="diff-badge" id="diff">0h</span>
-        <span class="diff-sub" id="diffNote">Same time</span>
+      <div class="diff">
+        <div class="diff-body">
+          <span class="diff-badge" id="diff">0h</span>
+          <span class="diff-sub" id="diffNote">Same time</span>
+        </div>
       </div>
 
       <div class="clock remote">
@@ -83,6 +85,7 @@
     </section>
 
   </main>
+  <div id="tip" class="tip" role="tooltip" hidden></div>
   <script type="module" src="popup.js"></script>
 </body>
 </html>

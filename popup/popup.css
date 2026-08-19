@@ -46,23 +46,19 @@
 
 .compare {
   display: flex;
-  align-items: stretch;
-  gap: 14px;
-  padding: 18px 16px 14px;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px 16px 16px;
   border-bottom: 1px solid var(--border);
   background: var(--surface);
 }
 
 .clock {
-  flex: 1 1 0;
-  min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 2px;
 }
-
-.clock.remote { align-items: flex-end; text-align: right; }
 
 .clock-label {
   display: flex;
@@ -81,6 +77,7 @@
   height: 7px;
   border-radius: 999px;
   background: var(--subtle);
+  cursor: help;
 }
 .status-dot.ok { background: var(--ok); box-shadow: 0 0 0 3px var(--ok-bg); }
 .status-dot.bad { background: var(--bad); box-shadow: 0 0 0 3px var(--bad-bg); }
@@ -105,8 +102,8 @@
 }
 .clock-time.ticking { animation: tickPulse 0.5s ease; }
 
-.local-time { font-size: 30px; color: var(--text); }
-.remote-time { font-size: 38px; color: var(--a600); }
+.local-time { font-size: 32px; color: var(--text); }
+.remote-time { font-size: 34px; color: var(--a600); }
 
 .clock-date {
   font-size: 11px;
@@ -117,24 +114,33 @@
 /* ---------- Diff ---------- */
 
 .diff {
-  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.diff::before,
+.diff::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.diff-body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   gap: 2px;
-  min-width: 56px;
 }
 
 .diff-badge {
   font-family: var(--font-mono);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   color: var(--a600);
   background: var(--a100);
   border-radius: 999px;
-  padding: 4px 12px;
+  padding: 3px 12px;
   letter-spacing: -0.02em;
 }
 
@@ -233,6 +239,7 @@
   width: 8px;
   height: 8px;
   border-radius: 999px;
+  cursor: help;
 }
 .loc-dot.ok { background: var(--ok); box-shadow: 0 0 0 3px var(--ok-bg); }
 .loc-dot.bad { background: var(--bad); box-shadow: 0 0 0 3px var(--bad-bg); }
@@ -324,3 +331,23 @@
 /* Dark mode: tintes de acento translúcidos y acentos más claros para el texto */
 :root[data-mode="dark"] .remote-time { color: var(--a400); }
 :root[data-mode="dark"] .diff-badge { color: var(--a400); }
+
+/* ---------- Native tooltip ---------- */
+
+.tip {
+  position: fixed;
+  z-index: 100;
+  pointer-events: none;
+  max-width: 230px;
+  background: #232326;
+  color: #fff;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.35;
+  text-align: center;
+  padding: 4px 9px;
+  border-radius: 6px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  animation: fadeIn 0.12s ease both;
+}
