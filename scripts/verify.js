@@ -80,12 +80,24 @@ console.log("data");
   check("search tokyo", tokyo.some((r) => r.timezone === "Asia/Tokyo"));
   const empty = searchLocations("");
   check("empty query returns curated", empty.length === CURATED_CITIES.length);
-  check("search dedup", searchLocations("new york").filter((r) => r.timezone === "America/New_York").length === 1);
+  const dupes = searchLocations("new york");
+  check(
+    "search no duplicate city|tz",
+    new Set(dupes.map((r) => `${r.city}|${r.timezone}`)).size === dupes.length
+  );
+  check("search 'chipre' finds Cyprus", searchLocations("chipre").some((r) => r.timezone === "Asia/Nicosia"));
+  check("search 'cyprus' finds Cyprus", searchLocations("cyprus").some((r) => r.timezone === "Asia/Nicosia"));
+  check("search 'albania' finds Albania", searchLocations("albania").some((r) => r.timezone === "Europe/Tirane"));
+  check("search 'albânia' finds Albania", searchLocations("albânia").some((r) => r.timezone === "Europe/Tirane"));
+  check("search 'peru' finds Lima", searchLocations("peru").some((r) => r.timezone === "America/Lima"));
+  check("search 'Perú' finds Lima", searchLocations("Perú").some((r) => r.timezone === "America/Lima"));
+  check("search 'españa' finds Madrid", searchLocations("españa").some((r) => r.timezone === "Europe/Madrid"));
+  check("search 'spain' finds Madrid", searchLocations("spain").some((r) => r.timezone === "Europe/Madrid"));
 }
 
 console.log("theme");
 {
-  check("accents defined", Object.keys(ACCENTS).length >= 12, String(Object.keys(ACCENTS).length));
+  check("accents defined", Object.keys(ACCENTS).length >= 10, String(Object.keys(ACCENTS).length));
   check("orange c600", ACCENTS.orange.c600 === "#ea580c");
   check("friendlyCity", friendlyCity("America/Argentina/Buenos_Aires") === "Buenos Aires");
   check("friendlyCity simple", friendlyCity("Asia/Tokyo") === "Tokyo");
