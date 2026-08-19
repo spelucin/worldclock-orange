@@ -16,8 +16,9 @@ async function updateBadge() {
     const primary = locations.find((l) => l.isPrimary);
     const timeZone = primary ? primary.timezone : LOCAL_TIMEZONE;
 
-    const { hour, minute } = getTimeInZone(timeZone);
-    const text = formatTime(hour, minute);
+    const t = getTimeInZone(timeZone);
+    if (!t) return;
+    const text = formatTime(t.hour, t.minute);
 
     const accent = ACCENTS[settings.accent] || ACCENTS.orange;
     await chrome.action.setBadgeBackgroundColor({ color: accent.c600 });
