@@ -1,11 +1,11 @@
 {
   "manifest_version": 3,
-  "name": "WorldClock",
+  "name": "WorkClock Orange",
   "version": "1.0.0",
-  "description": "Compara tu hora local con cualquier ciudad del mundo: diferencia horaria, horario laboral y múltiples ubicaciones guardadas.",
+  "description": "Compara tu hora local con cualquier ciudad del mundo: diferencia horaria, horario laboral y múltiples ubicaciones guardadas. Multilingüe (EN/ES/PT).",
   "action": {
     "default_popup": "popup/popup.html",
-    "default_title": "WorldClock",
+    "default_title": "WorkClock Orange",
     "default_icon": {
       "16": "icons/icon16.png",
       "32": "icons/icon32.png",
