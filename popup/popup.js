@@ -39,12 +39,18 @@ async function init() {
   applyTheme();
   applyI18n();
 
+  document.querySelectorAll("[data-i18n-title]").forEach((el) => {
+    el.setAttribute("data-tip", el.title);
+    el.removeAttribute("title");
+  });
+
   const search = createSearch({
     onPick: (item) => addLocation(item),
   });
   search.mount($("#searchWrap"));
 
   bind(search);
+  bindTip();
   render();
   setInterval(tick, 20000);
 }
@@ -95,10 +101,11 @@ function setPill(el, info) {
   if (info) {
     el.hidden = false;
     el.className = `status-dot ${info.cls}`;
-    el.title = info.label;
+    el.setAttribute("data-tip", info.label);
     el.setAttribute("aria-label", info.label);
   } else {
     el.hidden = true;
+    el.removeAttribute("data-tip");
   }
 }
 
@@ -170,8 +177,8 @@ function renderList(now) {
   $("#emptyState").hidden = locations.length > 0;
 
   locations.forEach((loc, index) => {
-    const t = getTimeInZone(loc.timezone, now);
-    if (!t) return;
+    const zt = getTimeInZone(loc.timezone, now);
+    if (!zt) return;
     const info = workInfo(loc.timezone, loc);
     const card = document.createElement("button");
     card.type = "button";
@@ -182,7 +189,7 @@ function renderList(now) {
 
     const dot = document.createElement("span");
     dot.className = `loc-dot ${info.cls}`;
-    dot.title = info.label;
+    dot.setAttribute("data-tip", info.label);
     dot.setAttribute("aria-label", info.label);
 
     const main = document.createElement("span");
@@ -197,7 +204,7 @@ function renderList(now) {
 
     const time = document.createElement("span");
     time.className = "loc-time";
-    time.textContent = formatTime(t.hour, t.minute);
+    time.textContent = formatTime(zt.hour, zt.minute);
 
     const offset = document.createElement("span");
     offset.className = "loc-offset";
@@ -210,7 +217,7 @@ function renderList(now) {
     const star = document.createElement("button");
     star.type = "button";
     star.className = `loc-action-btn star${loc.isPrimary ? " starred" : ""}`;
-    star.title = loc.isPrimary ? t("primaryLocation") : t("setPrimary");
+    star.setAttribute("data-tip", loc.isPrimary ? t("primaryLocation") : t("setPrimary"));
     star.innerHTML = STAR_ICON;
     star.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -220,7 +227,7 @@ function renderList(now) {
     const remove = document.createElement("button");
     remove.type = "button";
     remove.className = "loc-action-btn danger";
-    remove.title = t("remove");
+    remove.setAttribute("data-tip", t("remove"));
     remove.innerHTML = TRASH_ICON;
     remove.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -293,6 +300,50 @@ function bind(search) {
 
   $("#addBtn").addEventListener("click", toggleSearch);
   $("#emptyAddBtn").addEventListener("click", toggleSearch);
+}
+
+/* ---------- Native tooltip ---------- */
+
+function bindTip() {
+  const tip = $("#tip");
+
+  const show = (el) => {
+    const text = el.getAttribute("data-tip");
+    if (!text) return;
+    tip.textContent = text;
+    tip.hidden = false;
+    tip.style.left = "0px";
+    tip.style.top = "0px";
+    const rect = el.getBoundingClientRect();
+    const tr = tip.getBoundingClientRect();
+    const vw = document.documentElement.clientWidth;
+    const vh = document.documentElement.clientHeight;
+    let x = rect.left + rect.width / 2 - tr.width / 2;
+    x = Math.max(8, Math.min(x, vw - tr.width - 8));
+    let y = rect.bottom + 6;
+    if (y + tr.height > vh) y = rect.top - tr.height - 6;
+    tip.style.left = `${x}px`;
+    tip.style.top = `${y}px`;
+  };
+
+  const hide = () => {
+    tip.hidden = true;
+  };
+
+  document.addEventListener("mouseover", (e) => {
+    const el = e.target.closest("[data-tip]");
+    if (el) show(el);
+  });
+  document.addEventListener("mouseout", (e) => {
+    if (e.target.closest("[data-tip]")) hide();
+  });
+  document.addEventListener("focusin", (e) => {
+    const el = e.target.closest("[data-tip]");
+    if (el) show(el);
+  });
+  document.addEventListener("focusout", (e) => {
+    if (e.target.closest("[data-tip]")) hide();
+  });
 }
 
 const STAR_ICON = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M12 2.6l2.9 5.9 6.5.95-4.7 4.58 1.1 6.47L12 17.7l-5.8 3.05 1.1-6.47L2.6 9.7l6.5-.95z"/></svg>`;
