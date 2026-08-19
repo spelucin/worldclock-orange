@@ -33,11 +33,13 @@
 
     <section class="compare">
       <div class="clock local">
-        <span class="clock-label" data-i18n="yourZone">Your zone</span>
+        <span class="clock-label">
+          <span class="status-dot muted" id="localWork" aria-hidden="true"></span>
+          <span data-i18n="yourZone">Your zone</span>
+        </span>
         <span class="clock-zone" id="localZone">—</span>
         <span class="clock-time local-time" id="localTime">--:--</span>
         <span class="clock-date" id="localDate"></span>
-        <span class="pill muted" id="localWork"><i class="pill-dot"></i></span>
       </div>
 
       <div class="diff" id="diffWrap">
@@ -46,11 +48,13 @@
       </div>
 
       <div class="clock remote">
-        <span class="clock-label" id="remoteLabel" data-i18n="location">Location</span>
+        <span class="clock-label">
+          <span class="status-dot muted" id="remoteWork" hidden aria-hidden="true"></span>
+          <span id="remoteLabel" data-i18n="location">Location</span>
+        </span>
         <span class="clock-zone" id="remoteName">—</span>
         <span class="clock-time remote-time" id="remoteTime">--:--</span>
         <span class="clock-date" id="remoteDate"></span>
-        <span class="pill muted" id="remoteWork" hidden><i class="pill-dot"></i></span>
       </div>
     </section>
 

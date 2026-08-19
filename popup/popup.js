@@ -92,8 +92,14 @@ function workInfo(timeZone, work) {
 }
 
 function setPill(el, info) {
-  el.className = `pill ${info ? info.cls : "muted"}`;
-  el.innerHTML = info ? `<i class="pill-dot"></i>${info.label}` : "";
+  if (info) {
+    el.hidden = false;
+    el.className = `status-dot ${info.cls}`;
+    el.title = info.label;
+    el.setAttribute("aria-label", info.label);
+  } else {
+    el.hidden = true;
+  }
 }
 
 function render() {
@@ -116,27 +122,34 @@ function render() {
 
   if (active) {
     const remote = getTimeInZone(active.timezone, now);
-    const remoteTime = formatTime(remote.hour, remote.minute);
-    const remoteEl = $("#remoteTime");
-    if (lastRemoteTime && lastRemoteTime !== remoteTime) {
-      remoteEl.classList.remove("ticking");
-      void remoteEl.offsetWidth;
-      remoteEl.classList.add("ticking");
-    }
-    lastRemoteTime = remoteTime;
-
     $("#remoteLabel").textContent = active.isPrimary ? t("primaryLocation") : t("location");
     $("#remoteName").textContent = active.label;
-    $("#remoteTime").textContent = remoteTime;
-    $("#remoteDate").textContent = formatDate(active.timezone, now, locale());
-    const pill = $("#remoteWork");
-    pill.hidden = false;
-    setPill(pill, workInfo(active.timezone, active));
 
-    const diff = getHoursDiffMinutes(localTz, active.timezone, now);
-    $("#diff").textContent = formatDiff(diff);
-    $("#diffNote").textContent =
-      diff === 0 ? t("sameTime") : diff > 0 ? t("ahead") : t("behind");
+    if (!remote) {
+      $("#remoteTime").textContent = "--:--";
+      $("#remoteDate").textContent = "";
+      $("#remoteWork").hidden = true;
+      $("#diff").textContent = "—";
+      $("#diffNote").textContent = t("location");
+    } else {
+      const remoteTime = formatTime(remote.hour, remote.minute);
+      const remoteEl = $("#remoteTime");
+      if (lastRemoteTime && lastRemoteTime !== remoteTime) {
+        remoteEl.classList.remove("ticking");
+        void remoteEl.offsetWidth;
+        remoteEl.classList.add("ticking");
+      }
+      lastRemoteTime = remoteTime;
+
+      $("#remoteTime").textContent = remoteTime;
+      $("#remoteDate").textContent = formatDate(active.timezone, now, locale());
+      setPill($("#remoteWork"), workInfo(active.timezone, active));
+
+      const diff = getHoursDiffMinutes(localTz, active.timezone, now);
+      $("#diff").textContent = formatDiff(diff);
+      $("#diffNote").textContent =
+        diff === 0 ? t("sameTime") : diff > 0 ? t("ahead") : t("behind");
+    }
   } else {
     $("#remoteLabel").textContent = t("location");
     $("#remoteName").textContent = "—";
@@ -158,6 +171,7 @@ function renderList(now) {
 
   locations.forEach((loc, index) => {
     const t = getTimeInZone(loc.timezone, now);
+    if (!t) return;
     const info = workInfo(loc.timezone, loc);
     const card = document.createElement("button");
     card.type = "button";
@@ -167,7 +181,9 @@ function renderList(now) {
     card.dataset.id = loc.id;
 
     const dot = document.createElement("span");
-    dot.className = `loc-dot ${info ? info.cls : ""}`;
+    dot.className = `loc-dot ${info.cls}`;
+    dot.title = info.label;
+    dot.setAttribute("aria-label", info.label);
 
     const main = document.createElement("span");
     main.className = "loc-main";

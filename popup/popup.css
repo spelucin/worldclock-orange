@@ -65,12 +65,25 @@
 .clock.remote { align-items: flex-end; text-align: right; }
 
 .clock-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--subtle);
 }
+
+.status-dot {
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--subtle);
+}
+.status-dot.ok { background: var(--ok); box-shadow: 0 0 0 3px var(--ok-bg); }
+.status-dot.bad { background: var(--bad); box-shadow: 0 0 0 3px var(--bad-bg); }
 
 .clock-zone {
   font-size: 12px;
@@ -100,8 +113,6 @@
   color: var(--subtle);
   text-transform: capitalize;
 }
-
-.clock .pill { margin-top: 8px; }
 
 /* ---------- Diff ---------- */
 
@@ -223,8 +234,8 @@
   height: 8px;
   border-radius: 999px;
 }
-.loc-dot.ok { background: var(--ok); }
-.loc-dot.bad { background: var(--bad); }
+.loc-dot.ok { background: var(--ok); box-shadow: 0 0 0 3px var(--ok-bg); }
+.loc-dot.bad { background: var(--bad); box-shadow: 0 0 0 3px var(--bad-bg); }
 
 .loc-main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
 .loc-city {
