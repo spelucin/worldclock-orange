@@ -10,6 +10,7 @@ import {
   isWithinWorkingHours,
   friendlyCity,
   formatUtcOffset,
+  formatDate,
 } from "../lib/clock.js";
 import { CURATED_CITIES, searchLocations, allTimezones } from "../lib/data.js";
 import { ACCENTS } from "../lib/theme.js";
@@ -67,6 +68,20 @@ console.log("working hours");
   check("weekend allowed when disabled", isWithinWorkingHours("Europe/Madrid", "09:00", "18:00", false, sat) === true);
   const mon = new Date("2026-08-17T12:00:00Z");
   check("monday 12:00 UTC in Madrid (14:00) within", isWithinWorkingHours("Europe/Madrid", "09:00", "18:00", true, mon) === true);
+}
+
+console.log("resilience");
+{
+  check("getTimeInZone invalid returns null", getTimeInZone("Not/AZone") === null);
+  check("getTimeInZone UTC not null", getTimeInZone("UTC") !== null);
+  check("formatDate invalid is empty", formatDate("Not/AZone", now) === "");
+  let threw = false;
+  try {
+    isWithinWorkingHours("Not/AZone", "09:00", "18:00", true, now);
+  } catch {
+    threw = true;
+  }
+  check("isWithinWorkingHours invalid zone no throw", !threw);
 }
 
 console.log("data");
