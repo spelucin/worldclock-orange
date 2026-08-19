@@ -309,3 +309,7 @@
 }
 .empty-title { font-weight: 700; font-size: 14px; margin: 0; }
 .empty-text { font-size: 12px; color: var(--muted); margin: 0 0 10px; max-width: 240px; }
+
+/* Dark mode: tintes de acento translúcidos y acentos más claros para el texto */
+:root[data-mode="dark"] .remote-time { color: var(--a400); }
+:root[data-mode="dark"] .diff-badge { color: var(--a400); }

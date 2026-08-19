@@ -48,12 +48,14 @@
   --bad-bg: rgba(239, 68, 68, 0.12);
   --shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
   --ring: 0 0 0 3px rgba(255, 255, 255, 0.06);
+  --a50: color-mix(in srgb, var(--a500) 14%, transparent);
+  --a100: color-mix(in srgb, var(--a500) 22%, transparent);
+  --a200: color-mix(in srgb, var(--a500) 32%, transparent);
   color-scheme: dark;
 }
 
 /* Tailwind accent shades applied per accent name */
 [data-accent="orange"] { --a50:#fff7ed; --a100:#ffedd5; --a200:#fed7aa; --a300:#fdba74; --a400:#fb923c; --a500:#f97316; --a600:#ea580c; --a700:#c2410c; }
-[data-accent="amber"] { --a50:#fffbeb; --a100:#fef3c7; --a200:#fde68a; --a300:#fcd34d; --a400:#fbbf24; --a500:#f59e0b; --a600:#d97706; --a700:#b45309; }
 [data-accent="red"] { --a50:#fef2f2; --a100:#fee2e2; --a200:#fecaca; --a300:#fca5a5; --a400:#f87171; --a500:#ef4444; --a600:#dc2626; --a700:#b91c1c; }
 [data-accent="rose"] { --a50:#fff1f2; --a100:#ffe4e6; --a200:#fecdd3; --a300:#fda4af; --a400:#fb7185; --a500:#f43f5e; --a600:#e11d48; --a700:#be123c; }
 [data-accent="fuchsia"] { --a50:#fdf4ff; --a100:#fae8ff; --a200:#f5d0fe; --a300:#f0abfc; --a400:#e879f9; --a500:#d946ef; --a600:#c026d3; --a700:#a21caf; }
@@ -64,11 +66,12 @@
 [data-accent="teal"] { --a50:#f0fdfa; --a100:#ccfbf1; --a200:#99f6e4; --a300:#5eead4; --a400:#2dd4bf; --a500:#14b8a6; --a600:#0d9488; --a700:#0f766e; }
 [data-accent="emerald"] { --a50:#ecfdf5; --a100:#d1fae5; --a200:#a7f3d0; --a300:#6ee7b7; --a400:#34d399; --a500:#10b981; --a600:#059669; --a700:#047857; }
 [data-accent="green"] { --a50:#f0fdf4; --a100:#dcfce7; --a200:#bbf7d0; --a300:#86efac; --a400:#4ade80; --a500:#22c55e; --a600:#16a34a; --a700:#15803d; }
-[data-accent="lime"] { --a50:#f7fee7; --a100:#ecfccb; --a200:#d9f99d; --a300:#bef264; --a400:#a3e635; --a500:#84cc16; --a600:#65a30d; --a700:#4d7c0f; }
 
 /* ---------- Base ---------- */
 
 * { box-sizing: border-box; }
+
+[hidden] { display: none !important; }
 
 html, body {
   margin: 0;
