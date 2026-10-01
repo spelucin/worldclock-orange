@@ -192,8 +192,9 @@ h1 {
 
 .hero-art img {
   width: 100%;
+  max-width: 340px;
   border-radius: var(--radius);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45), 0 0 0 1px var(--line);
 }
 
 /* --------------------------------------------------------------- sections */
@@ -262,7 +263,7 @@ figure {
 figure img {
   width: 100%;
   border-radius: var(--radius);
-  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.4), 0 0 0 1px var(--line);
   display: block;
 }
 
@@ -275,7 +276,15 @@ figcaption {
 .shots {
   display: grid;
   gap: 24px;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  align-items: start;
+}
+
+/* The options page is landscape, so it sits below the portrait popup shots
+   instead of stretching one grid row out of step with the others. */
+.shot-wide {
+  max-width: 620px;
+  margin: 24px auto 0;
 }
 
 .prose {
