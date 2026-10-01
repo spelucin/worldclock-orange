@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WorkClock Orange &middot; World time from your toolbar</title>
+    <meta
+      name="description"
+      content="WorkClock Orange is a free Chrome extension that compares your local time with any city in the world: time difference, working hours and a 24-hour overlap view. No account, no tracking."
+    />
+    <link rel="icon" href="assets/icon128.png" />
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+  <body>
+    <header class="site">
+      <div class="wrap">
+        <nav>
+          <a class="brand" href="index.html">
+            <img src="assets/icon128.png" alt="" width="34" height="34" />
+            <span>WorkClock Orange</span>
+          </a>
+          <a class="link" href="#features">Features</a>
+          <a class="link" href="#screenshots">Screenshots</a>
+          <a class="link" href="privacy.html">Privacy</a>
+          <a class="link" href="support.html">Support</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="wrap">
+        <section class="hero">
+          <div>
+            <span class="pill">Chrome extension</span>
+            <h1>Every timezone, one click from your toolbar.</h1>
+            <p class="lede">
+              Save the cities you work with, see the time difference at a glance,
+              and know who is inside working hours before you schedule the call.
+            </p>
+            <div class="actions">
+              <a
+                class="btn"
+                id="install"
+                href="#install"
+                aria-disabled="true"
+                rel="noopener"
+                >Add to Chrome</a
+              >
+              <a class="btn secondary" href="#screenshots">See it in action</a>
+            </div>
+            <p class="install-note" id="install-note">
+              Version 1.0.0 &middot; Free &middot; No account required. The
+              store link goes live when the extension is published.
+            </p>
+          </div>
+          <div class="hero-art">
+            <img
+              src="assets/01-compare-cities.png"
+              alt="The WorkClock Orange popup showing saved cities with their local time and a working-hours indicator."
+              width="1280"
+              height="800"
+            />
+          </div>
+        </section>
+      </div>
+
+      <div class="wrap">
+        <section id="features">
+          <h2>What it does</h2>
+          <p class="sub">
+            Everything happens inside your browser. There is no account, no
+            server, and nothing leaves your machine.
+          </p>
+          <div class="grid">
+            <div class="card">
+              <span class="glyph" aria-hidden="true">1</span>
+              <h3>Time difference at a glance</h3>
+              <p>
+                Each saved city shows its current time and the offset from your
+                own zone, so you never have to do the arithmetic.
+              </p>
+            </div>
+            <div class="card">
+              <span class="glyph" aria-hidden="true">24</span>
+              <h3>Full 24-hour overlap</h3>
+              <p>
+                Expand a city to see its whole day laid against yours, with
+                working hours shaded and the workable window picked out.
+              </p>
+            </div>
+            <div class="card">
+              <span class="glyph" aria-hidden="true">+</span>
+              <h3>Search any city</h3>
+              <p>
+                Type part of a city or country name and add it in a few
+                keystrokes. City and timezone data ships with the extension.
+              </p>
+            </div>
+            <div class="card">
+              <span class="glyph" aria-hidden="true">&#9788;</span>
+              <h3>Working hours per city</h3>
+              <p>
+                A green or red dot shows whether a colleague is inside working
+                hours right now, and you set each city's own schedule.
+              </p>
+            </div>
+            <div class="card">
+              <span class="glyph" aria-hidden="true">&#9789;</span>
+              <h3>Theme and accent</h3>
+              <p>
+                Follow the system theme or force light or dark, and choose from
+                eleven accent colours to match the rest of your browser.
+              </p>
+            </div>
+            <div class="card">
+              <span class="glyph" aria-hidden="true">&#127760;</span>
+              <h3>Three languages</h3>
+              <p>
+                The interface ships in English, Spanish and Portuguese, switchable
+                from the options page.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="screenshots">
+          <h2>Screenshots</h2>
+          <p class="sub">The real extension UI, captured from the shipping build.</p>
+          <div class="shots">
+            <figure>
+              <img
+                src="assets/01-compare-cities.png"
+                alt="Popup listing saved cities with their local times."
+                width="1280"
+                height="800"
+                loading="lazy"
+              />
+              <figcaption>Compare your saved cities</figcaption>
+            </figure>
+            <figure>
+              <img
+                src="assets/02-24h-overlap.png"
+                alt="An expanded city showing a 24-hour timeline against your own day."
+                width="1280"
+                height="800"
+                loading="lazy"
+              />
+              <figcaption>Find the hour that suits both</figcaption>
+            </figure>
+            <figure>
+              <img
+                src="assets/03-search-cities.png"
+                alt="The search panel with matching cities listed."
+                width="1280"
+                height="800"
+                loading="lazy"
+              />
+              <figcaption>Search as you type</figcaption>
+            </figure>
+            <figure>
+              <img
+                src="assets/04-options.png"
+                alt="The settings page with theme, language and working hours controls."
+                width="1280"
+                height="800"
+                loading="lazy"
+              />
+              <figcaption>Settings</figcaption>
+            </figure>
+            <figure>
+              <img
+                src="assets/05-dark-mode.png"
+                alt="The popup in dark mode with a violet accent."
+                width="1280"
+                height="800"
+                loading="lazy"
+              />
+              <figcaption>Dark mode and accent colours</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section id="privacy">
+          <h2>Privacy</h2>
+          <p class="sub">
+            WorkClock Orange collects nothing, because there is nowhere for it to
+            send anything.
+          </p>
+          <div class="prose">
+            <p>
+              Your saved cities and preferences are kept in your browser's local
+              storage. They never leave your machine. The extension makes no
+              network requests, sets no cookies, contains no analytics or
+              tracking, and has no permission to read the pages you visit.
+            </p>
+            <p>
+              <a href="privacy.html">Read the full privacy policy</a>.
+            </p>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site">
+      <div class="wrap foot">
+        <p>WorkClock Orange &middot; Version 1.0.0</p>
+        <nav>
+          <a class="link" href="privacy.html">Privacy</a>
+          <a class="link" href="support.html">Support</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

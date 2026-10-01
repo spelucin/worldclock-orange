@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Support &middot; WorkClock Orange</title>
+    <meta
+      name="description"
+      content="Help, answers to common questions, and how to report a problem with the WorkClock Orange Chrome extension."
+    />
+    <link rel="icon" href="assets/icon128.png" />
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+  <body>
+    <header class="site">
+      <div class="wrap">
+        <nav>
+          <a class="brand" href="index.html">
+            <img src="assets/icon128.png" alt="" width="34" height="34" />
+            <span>WorkClock Orange</span>
+          </a>
+          <a class="link" href="index.html">Home</a>
+          <a class="link" href="privacy.html">Privacy</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="wrap">
+        <section>
+          <h1>Support</h1>
+          <p class="sub">
+            Common questions first. If your answer is not here, email
+            <a href="mailto:alex@spelucin.pro">alex@spelucin.pro</a>.
+          </p>
+
+          <div class="prose">
+            <h2>Getting started</h2>
+
+            <h3>How do I add a city?</h3>
+            <p>
+              Click the WorkClock Orange icon in your toolbar, then
+              <strong>Add</strong>. Type part of a city or country name and pick
+              it from the results. The city is saved to your browser
+              automatically.
+            </p>
+
+            <h3>How do I change which city is "my" time?</h3>
+            <p>
+              Your own zone is the one your computer is set to. To pin the popup
+              to a different zone, set that city's hours on the options page and
+              treat it as the reference. Chrome's own time zone setting lives in
+              your operating system's settings, not in the extension.
+            </p>
+
+            <h3>How do I set working hours for a city?</h3>
+            <p>
+              Open the options page from the popup, find the city under
+              <strong>Locations</strong>, and set its start and end time. Each
+              city keeps its own schedule, so you can model a part-time
+              colleague or a team in another region.
+            </p>
+
+            <h3>What do the coloured dots mean?</h3>
+            <p>
+              Green means the city is currently inside its working hours. Grey
+              means it is not, typically because it is outside those hours or
+              the day is a weekend when weekday-only hours are set.
+            </p>
+
+            <h3>How do I get the 24-hour view?</h3>
+            <p>
+              Click a saved city in the popup. Its full day expands underneath,
+              laid against your own, with working hours shaded so the workable
+              window is easy to spot. Click it again to collapse.
+            </p>
+
+            <h3>Can I change the theme or the accent colour?</h3>
+            <p>
+              Yes, on the options page. Theme can follow the system or be forced
+              to light or dark, and there are eleven accent colours. Changes
+              apply to the popup immediately.
+            </p>
+
+            <h3>Which languages are supported?</h3>
+            <p>English, Spanish and Portuguese. Set it on the options page.</p>
+
+            <h2>Privacy questions</h2>
+
+            <h3>Does the extension send anything to a server?</h3>
+            <p>
+              No. It makes no network requests at all. Everything you enter is
+              stored locally in your browser. See the
+              <a href="privacy.html">privacy policy</a> for the specifics,
+              including exactly which data is stored and why each permission is
+              needed.
+            </p>
+
+            <h3>Can it see the pages I visit?</h3>
+            <p>
+              No. The extension requests no host permissions and has no ability
+              to read or alter web page content.
+            </p>
+
+            <h3>How do I delete everything it stores?</h3>
+            <p>
+              Uninstall the extension, or visit <code>chrome://extensions</code>,
+              find WorkClock Orange, and clear its storage. Uninstalling removes
+              all saved cities and preferences.
+            </p>
+
+            <h2>Troubleshooting</h2>
+
+            <h3>The icon is not in my toolbar</h3>
+            <p>
+              Chrome sometimes hides new extensions behind the extensions menu.
+              Click the puzzle-piece icon in the toolbar and pin
+              <strong>WorkClock Orange</strong>.
+            </p>
+
+            <h3>A city shows the wrong time</h3>
+            <p>
+              Usually this means your computer's time zone is set incorrectly.
+              Check that first. If your computer's zone is right and a city is
+              still wrong, please report it with the city name.
+            </p>
+
+            <h3>The toolbar badge looks stale</h3>
+            <p>
+              The badge refreshes on a timer to avoid running constantly. If it
+              seems behind, opening the popup recalculates everything
+              immediately.
+            </p>
+
+            <h3>Can I use it on Firefox or Safari?</h3>
+            <p>
+              The extension is built for Chrome and published in the Chrome Web
+              Store. It uses Chrome extension APIs, so it will not run in other
+              browsers as-is.
+            </p>
+
+            <h2>Reporting a problem</h2>
+            <p>
+              Please include:
+            </p>
+            <ul>
+              <li>Your Chrome version.</li>
+              <li>What you expected to happen, and what happened instead.</li>
+              <li>The city names involved, if the problem relates to times.</li>
+              <li>A screenshot, if it helps.</li>
+            </ul>
+            <p>
+              Send it to <a href="mailto:alex@spelucin.pro">alex@spelucin.pro</a>.
+              Since the source is open, bug reports that come with a fix are
+              especially welcome.
+            </p>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site">
+      <div class="wrap foot">
+        <p>WorkClock Orange &middot; Support</p>
+        <nav>
+          <a class="link" href="index.html">Home</a>
+          <a class="link" href="privacy.html">Privacy</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

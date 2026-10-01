@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Privacy policy &middot; WorkClock Orange</title>
+    <meta
+      name="description"
+      content="WorkClock Orange stores everything locally in your browser. No account, no analytics, no tracking, no network requests. Full privacy policy."
+    />
+    <link rel="icon" href="assets/icon128.png" />
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+  <body>
+    <header class="site">
+      <div class="wrap">
+        <nav>
+          <a class="brand" href="index.html">
+            <img src="assets/icon128.png" alt="" width="34" height="34" />
+            <span>WorkClock Orange</span>
+          </a>
+          <a class="link" href="index.html">Home</a>
+          <a class="link" href="support.html">Support</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="wrap">
+        <section>
+          <h1>Privacy policy</h1>
+          <p class="sub">Last updated: 30 September 2026</p>
+
+          <div class="prose">
+            <p>
+              WorkClock Orange is a free, open-source Chrome extension. This
+              policy explains what the extension does with your data. The short
+              version: it stores nothing anywhere, because it has nowhere to
+              store it.
+            </p>
+
+            <h2>Summary</h2>
+            <ul>
+              <li>No data is collected.</li>
+              <li>No data is sold or shared, because none is collected.</li>
+              <li>No analytics, advertising, or tracking of any kind.</li>
+              <li>No cookies.</li>
+              <li>No network requests at all.</li>
+              <li>Your settings stay on your device.</li>
+            </ul>
+
+            <h2>What the extension stores</h2>
+            <p>
+              When you save a city or change a preference, that value is written
+              to your browser's local extension storage
+              (<code>chrome.storage.local</code>). This storage belongs to your
+              Chrome profile on your own device.
+            </p>
+            <div class="table-scroll">
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Data</th>
+                    <th scope="col">What it is</th>
+                    <th scope="col">Where it lives</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Saved locations</td>
+                    <td>
+                      City label, IANA timezone identifier, country code, and the
+                      working hours you set for it
+                    </td>
+                    <td><code>chrome.storage.local</code>, on your device</td>
+                  </tr>
+                  <tr>
+                    <td>Preferences</td>
+                    <td>
+                      Theme mode, accent colour, interface language, and your own
+                      working hours
+                    </td>
+                    <td><code>chrome.storage.local</code>, on your device</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              This data is never transmitted. Uninstalling the extension removes
+              it. Clearing Chrome's extension storage also removes it.
+            </p>
+
+            <h2>Permissions, and why each one is needed</h2>
+            <div class="table-scroll">
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Permission</th>
+                    <th scope="col">Why it is required</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>storage</code></td>
+                    <td>
+                      Saves your cities and preferences on your device so they
+                      survive a browser restart.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><code>alarms</code></td>
+                    <td>
+                      Schedules a periodic refresh so the toolbar badge and your
+                      cities stay accurate without you reopening the popup.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              The extension requests <strong>no host permissions</strong>. It
+              cannot read, change, or transmit the content of the web pages you
+              visit, and it does not inject anything into them.
+            </p>
+
+            <h2>Network activity</h2>
+            <p>
+              The extension makes no network requests. It contacts no servers, no
+              analytics endpoints, and no third-party services. It does not load
+              remote code, so there is no code fetched at runtime. All city and
+              timezone data is bundled inside the extension itself.
+            </p>
+            <p>
+              This site, which you are reading on, is a static page published on
+              GitHub Pages. Like all websites, GitHub may process standard
+              server logs such as IP addresses for security and abuse
+              prevention. Those logs are handled by GitHub under
+              <a href="https://github.com/site/policies" rel="noopener"
+                >GitHub's site policies</a
+              >, not by this extension.
+            </p>
+
+            <h2>Third parties</h2>
+            <p>
+              There are none. The extension bundles no third-party libraries, no
+              fonts, and no remote scripts. It contains no advertising or
+              affiliate links.
+            </p>
+
+            <h2>Children</h2>
+            <p>
+              The extension is not directed at children and collects no data from
+              anyone.
+            </p>
+
+            <h2>Your rights</h2>
+            <p>
+              Because no data is collected, there is nothing for us to disclose,
+              correct, or delete on request. You can remove everything the
+              extension stores at any time by removing the extension, or by
+              clearing its storage in
+              <code>chrome://extensions</code>.
+            </p>
+
+            <h2>Changes to this policy</h2>
+            <p>
+              If a future version changes what the extension does with data, this
+              policy will be updated here and the date above will change. The
+              version's source code is public, so the behaviour described here
+              can be checked against the code at any time.
+            </p>
+
+            <h2>Contact</h2>
+            <p>
+              Questions about this policy can be sent to
+              <a href="mailto:alex@spelucin.pro">alex@spelucin.pro</a>.
+            </p>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site">
+      <div class="wrap foot">
+        <p>WorkClock Orange &middot; Privacy policy</p>
+        <nav>
+          <a class="link" href="index.html">Home</a>
+          <a class="link" href="support.html">Support</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>
